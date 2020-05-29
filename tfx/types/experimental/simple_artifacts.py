@@ -12,26 +12,37 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""A set of simple Artifact types for use with AI Platform Pipelines.
+
+Experimental: the artifact definitions here are expected to change.
+"""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
-
-from tfx.experimental.templates.taxi.models.keras import model
+from tfx.types import artifact
 
 
-class ModelTest(tf.test.TestCase):
-
-  def testBuildKerasModel(self):
-    built_model = model._build_keras_model(
-        hidden_units=[1, 1], learning_rate=0.1)  # pylint: disable=protected-access
-    self.assertEqual(len(built_model.layers), 9)
-
-    built_model = model._build_keras_model(hidden_units=[1], learning_rate=0.1)  # pylint: disable=protected-access
-    self.assertEqual(len(built_model.layers), 8)
+class Dataset(artifact.Artifact):
+  TYPE_NAME = 'Dataset'
 
 
-if __name__ == '__main__':
-  tf.test.main()
+class File(artifact.Artifact):
+  TYPE_NAME = 'File'
+
+
+class Statistics(artifact.Artifact):
+  TYPE_NAME = 'Statistics'
+
+
+class Model(artifact.Artifact):
+  TYPE_NAME = 'Model'
+
+
+class Metrics(artifact.Artifact):
+  TYPE_NAME = 'Metrics'
+
+
+class Schema(artifact.Artifact):
+  TYPE_NAME = 'Schema'
